@@ -1,26 +1,61 @@
 from __future__ import annotations
 
 import argparse
+import sys
+from pathlib import Path
+from typing import Sequence
 
 
 def build_parser() -> argparse.ArgumentParser:
+    # базовый cli парсер
     parser = argparse.ArgumentParser(
         prog="brand-report",
+        description="generate brand reports from csv files",
     )
     parser.add_argument(
         "--files",
         nargs="+",
+        metavar="FILE",
+        help="paths to csv files",
     )
     parser.add_argument(
         "--report",
+        metavar="NAME",
+        help="report name, e.g. average-rating",
     )
     return parser
 
 
-def main() -> None:
+def _validate_args(args: argparse.Namespace) -> None:
+    # валидация наличия параметров
+    if not args.files:
+        raise ValueError("error: --files is required")
+    if not args.report:
+        raise ValueError("error: --report is required")
+    # проверка существования файлов
+    missing = [p for p in args.files if not Path(p).is_file()]
+    if missing:
+        raise ValueError(f"error: files not found: {', '.join(missing)}")
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    # точка входа cli
     parser = build_parser()
-    parser.print_help()
+    args = parser.parse_args(args=argv)
+
+    try:
+        _validate_args(args)
+    except ValueError as e:
+        # печатаем ошибку и help чтобы было удобно исправить ввод
+        print(str(e), file=sys.stderr)
+        parser.print_help(sys.stderr)
+        return 2
+
+    # заглушка до реализации пайплайна отчетов
+    print(f"requested report: {args.report}")
+    print("report generation is not implemented yet")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
