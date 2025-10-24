@@ -18,7 +18,7 @@ pytest-cov = "^5.0"
 
 # сам запуск через поетри
 [tool.poetry.scripts]
-brand-report = "brand_rating_report.cli:main"
+brand-report = "brand_reports.cli:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
