@@ -20,6 +20,11 @@ pytest-cov = "^5.0"
 [tool.poetry.scripts]
 brand-report = "brand_reports.cli:main"
 
+# тесты
+[tool.pytest.ini_options]
+addopts = "-q --cov=brand_reports --cov-report=term-missing --cov-fail-under=80"
+testpaths = ["src/tests"]
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
