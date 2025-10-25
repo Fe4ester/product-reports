@@ -5,6 +5,8 @@ import sys
 from pathlib import Path
 from typing import Sequence
 
+from src.brand_reports.reports.registry import get_report, list_reports
+
 
 def build_parser() -> argparse.ArgumentParser:
     # базовый cli парсер
@@ -48,6 +50,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ValueError as e:
         # печатаем ошибку и help чтобы было удобно исправить ввод
         print(str(e), file=sys.stderr)
+        parser.print_help(sys.stderr)
+        return 2
+
+    # проверка существования отчета в реестре
+    try:
+        report = get_report(args.report)
+    except KeyError:
+        available = list_reports()
+        available_str = ", ".join(available) if available else "<none>"
+        print(
+            f"error: unknown report '{args.report}', available reports: {available_str}",
+            file=sys.stderr,
+        )
         parser.print_help(sys.stderr)
         return 2
 
