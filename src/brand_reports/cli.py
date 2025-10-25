@@ -5,7 +5,12 @@ import sys
 from pathlib import Path
 from typing import Sequence
 
+from tabulate import tabulate
+
+# импорт для регистрации отчетов
+import brand_reports.reports  # noqa: F401
 from src.brand_reports.reports.registry import get_report, list_reports
+from src.brand_reports.utils.csv_reader import read_csv_rows
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -66,9 +71,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.print_help(sys.stderr)
         return 2
 
-    # заглушка до реализации пайплайна отчетов
-    print(f"requested report: {args.report}")
-    print("report generation is not implemented yet")
+    # чтение данных и генерация отчета
+    rows = read_csv_rows(args.files)
+    data = report.generate(rows)
+
+    # вывод таблицы
+    headers = ["brand", "average_rating"]
+    table_rows = [[d["brand"], f"{float(d['average_rating']):.2f}"] for d in data]
+    print(tabulate(table_rows, headers=headers, tablefmt="github"))
     return 0
 
 
