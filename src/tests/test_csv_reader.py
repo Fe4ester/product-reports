@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from src.brand_reports.utils.csv_reader import read_csv_rows
+from brand_reports.utils.csv_reader import read_csv_rows
 
 
 def _write_csv(path: Path, content: str) -> None:

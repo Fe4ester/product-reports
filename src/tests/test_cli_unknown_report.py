@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.brand_reports.cli import main
+from brand_reports.cli import main
 
 
 def test_cli_unknown_report_returns_error_and_prints_help(tmp_path: Path, capsys):

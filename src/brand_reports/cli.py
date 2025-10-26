@@ -9,8 +9,8 @@ from tabulate import tabulate
 
 # импорт для регистрации отчетов
 import brand_reports.reports  # noqa: F401
-from src.brand_reports.reports.registry import get_report, list_reports
-from src.brand_reports.utils.csv_reader import read_csv_rows
+from brand_reports.reports.registry import get_report, list_reports
+from brand_reports.utils.csv_reader import read_csv_rows
 
 
 def build_parser() -> argparse.ArgumentParser:
