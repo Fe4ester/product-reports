@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.brand_reports.cli import main
+from brand_reports.cli import main
 
 
 def test_cli_success_prints_table(tmp_path: Path, capsys):

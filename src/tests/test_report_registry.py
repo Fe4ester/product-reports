@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.brand_reports.reports.base import Report
-from src.brand_reports.reports.registry import REPORT_REGISTRY, get_report, list_reports, register_report
+from brand_reports.reports.base import Report
+from brand_reports.reports.registry import REPORT_REGISTRY, get_report, list_reports, register_report
 
 
 class _DummyReport(Report):

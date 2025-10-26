@@ -1,17 +1,15 @@
-[project]
+[tool.poetry]
 name = "product-reports"
 version = "0.1.0"
 description = ""
-authors = [
-    { name = "lian", email = "d.samat.work@gmail.com" }
-]
+authors = ["lian <d.samat.work@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.10,<4.0"
-dependencies = [
-    "tabulate>=0.9,<1.0"
-]
+packages = [{ include = "brand_reports", from = "src" }]
 
-# dev зависимости для тестов
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+tabulate = ">=0.9,<1.0"
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2"
 pytest-cov = "^5.0"

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src.brand_reports.reports.average_rating import AverageRatingReport
+from brand_reports.reports.average_rating import AverageRatingReport
 
 
 def test_average_rating_computation_and_sorting():
